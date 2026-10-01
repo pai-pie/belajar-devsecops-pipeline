@@ -1,7 +1,7 @@
 """Modul backend autentikasi Flask dengan antarmuka web interaktif."""
 
 import sqlite3
-from flask import Flask, render_template, request
+from flask import Flask, jsonify, render_template, request
 
 app = Flask(__name__)
 
@@ -47,6 +47,17 @@ def index():
     return render_template(
         "index.html", message=message, status_class=status_class
     )
+
+@app.route("/about")
+def about():
+    """Menampilkan informasi singkat tentang aplikasi."""
+    return "Portal Login - Pipeline DevSecOps dengan GitHub Actions"
+
+
+@app.route("/health")
+def health():
+    """Endpoint untuk memeriksa status aplikasi."""
+    return jsonify(status="ok", version="1.1")
 
 if __name__ == "__main__":
     init_db()
